@@ -1,0 +1,40 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+  imageName: 'text4shell-vuln'
+  repository: 'kaz-sysdig'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: '**/Dockerfile-vuln'
+        repository: '$(imageName)'
+        tags: |
+          $(tag)
+    - task: Sysdig@1
+      inputs:
+        sysdigurl: 'https://app.us4.sysdig.com'
+        apikey: '503ae4b0-0fff-4ca4-bae5-e78b4bf82e97'
+        # image: '$(imageName):$(tag)'
+        image: '$(ImageName):$(tag)'
+        failBuild: true
+        verbose: true
