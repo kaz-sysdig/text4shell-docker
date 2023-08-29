@@ -8,7 +8,7 @@ RUN mvn -f /usr/src/app/pom.xml clean package
 FROM amazoncorretto:20-alpine
 
 #Update apk upgrade libcrypto3 and libssl explicitly to 3.0.9-r1
-RUN apk update && apk add musl==1.2.3-r5 ca-certificates-bundle==20230506-r0 libcrypto3==3.0.9-r1 libssl3==3.0.9-r1 musl-utils==1.2.3-r5
+RUN apk update && apk add musl==1.2.4-r1 ca-certificates-bundle==20230506-r0 libcrypto3==3.0.9-r1 libssl3==3.0.9-r1 musl-utils==1.2.4-r1
 
 # Set the working directory to /app
 WORKDIR /app
