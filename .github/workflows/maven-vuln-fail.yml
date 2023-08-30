@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 env:
-  SYSDIG_URL: https://app.au1.sysdig.com
+  SYSDIG_URL: https://app.us4.sysdig.com
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}-vuln
   BYPASS_SCAN_FAIL: false
@@ -34,7 +34,7 @@ jobs:
         image-tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
         sysdig-secure-token: ${{ secrets.SECURE_API_TOKEN }}
         input-type: docker-daemon
-        sysdig-secure-url: https://app.au1.sysdig.com
+        sysdig-secure-url: https://app.us4.sysdig.com
         run-as-user: root
     
    # - name: Sysdig Secure Inline Scan - New
